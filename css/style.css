@@ -48,7 +48,7 @@
 
 .todo-enter-active, .todo-leave-active { transform-style: preserve-3d; perspective: 800px; transition: all 0.8s !important; }
 
-.todo-leave-active { display: block; width: 100%; position: absolute; }
+.todo-leave-active { display: block; width: 80%; position: absolute; }
 
 .footer ul { width: 600px; max-width: 80%; margin: 55px auto; display: flex; justify-content: space-around; border-top: 2px dashed #000; padding-top: 25px; }
 
