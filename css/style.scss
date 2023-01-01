@@ -54,8 +54,9 @@
         box-shadow: 2px 2px 0px 2px #000;
         transition: 0.1s all;
         &:hover {
-            color: white;
-            background-color: orangered;
+            color: orangered;
+            // background-color: orangered;
+            border: 2px solid orangered;
             cursor: pointer;
             box-shadow: 2px 2px 0px 2px transparent;
             transform: rotateZ(0deg);
@@ -119,14 +120,6 @@
                 border-color: orangered;
             }
         }
-        span {
-            display: inline-block;
-            margin-left: 15px;
-            width: 90%;
-            &.del {
-                text-decoration: line-through;
-            }
-        }
         button {
             padding: 0 10px;
             background-color: transparent;
@@ -138,6 +131,18 @@
                 cursor: pointer;
                 background-color: black;
                 color: #fff;
+            }
+        }
+        span {
+            display: inline-block;
+            width: 90%;
+            user-select: none;
+            margin-left: 15px;
+            &.del {
+                text-decoration: line-through;
+            }
+            &:hover {
+                cursor: pointer;
             }
         }
 
@@ -174,7 +179,7 @@
 .todo-leave-active {
     // 关键处
     display: block;
-    width: 80%;
+    width: 100%;
     position: absolute;
 }
 .footer ul {
@@ -185,21 +190,28 @@
     justify-content: space-around;
     border-top: 2px dashed #000;
     padding-top: 25px;
+    position: relative;
+    color: #666;
+    transition: all 1s;
+    &::before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        border-top: 20px dotted rgba(255, 20, 120, 0.4);
+        transform: translateY(-50%);
+    }
     li {
-        text-align: center;
         list-style: none;
         padding: 5px;
         border-radius: 5px;
         font-weight: 550;
-
+        border: 2px solid transparent;
+        &:not(:first-child).active,
         &:not(:first-child):hover {
-            background-color: orangered;
-            color: white;
-            cursor: pointer;
-        }
-        &:not(:first-child).active {
-            background-color: orangered;
-            color: white;
+            color: orangered;
+            border: 2px solid orangered;
             cursor: pointer;
         }
     }

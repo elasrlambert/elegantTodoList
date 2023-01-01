@@ -16,7 +16,7 @@
 
 .header button { padding: 5px; background-color: white; font-weight: bold; border-radius: 5px; outline: none; transform: rotateZ(15deg); box-shadow: 2px 2px 0px 2px #000; transition: 0.1s all; }
 
-.header button:hover { color: white; background-color: orangered; cursor: pointer; box-shadow: 2px 2px 0px 2px transparent; transform: rotateZ(0deg); }
+.header button:hover { color: orangered; border: 2px solid orangered; cursor: pointer; box-shadow: 2px 2px 0px 2px transparent; transform: rotateZ(0deg); }
 
 .content-box { width: 600px; max-width: 80%; margin: 15px auto; perspective: 800px; min-height: 250px; transform-style: preserve-3d; }
 
@@ -32,13 +32,15 @@
 
 .content-box li .status-item-finished:hover { cursor: pointer; border-color: orangered; }
 
-.content-box li span { display: inline-block; margin-left: 15px; width: 90%; }
-
-.content-box li span.del { text-decoration: line-through; }
-
 .content-box li button { padding: 0 10px; background-color: transparent; height: 25px; line-height: 25px; margin: auto 0; border: none; }
 
 .content-box li button:hover { cursor: pointer; background-color: black; color: #fff; }
+
+.content-box li span { display: inline-block; width: 90%; user-select: none; margin-left: 15px; }
+
+.content-box li span.del { text-decoration: line-through; }
+
+.content-box li span:hover { cursor: pointer; }
 
 .content-box li:hover { transform: translateZ(50px); box-shadow: 0px 0px 8px 2px #eee; }
 
@@ -48,12 +50,12 @@
 
 .todo-enter-active, .todo-leave-active { transform-style: preserve-3d; perspective: 800px; transition: all 0.8s !important; }
 
-.todo-leave-active { display: block; width: 80%; position: absolute; }
+.todo-leave-active { display: block; width: 100%; position: absolute; }
 
-.footer ul { width: 600px; max-width: 80%; margin: 55px auto; display: flex; justify-content: space-around; border-top: 2px dashed #000; padding-top: 25px; }
+.footer ul { width: 600px; max-width: 80%; margin: 55px auto; display: flex; justify-content: space-around; border-top: 2px dashed #000; padding-top: 25px; position: relative; color: #666; transition: all 1s; }
 
-.footer ul li { text-align: center; list-style: none; padding: 5px; border-radius: 5px; font-weight: 550; }
+.footer ul::before { display: block; content: ""; position: absolute; top: 0; width: 100%; border-top: 20px dotted rgba(255, 20, 120, 0.4); transform: translateY(-50%); }
 
-.footer ul li:not(:first-child):hover { background-color: orangered; color: white; cursor: pointer; }
+.footer ul li { list-style: none; padding: 5px; border-radius: 5px; font-weight: 550; border: 2px solid transparent; }
 
-.footer ul li:not(:first-child).active { background-color: orangered; color: white; cursor: pointer; }
+.footer ul li:not(:first-child).active, .footer ul li:not(:first-child):hover { color: orangered; border: 2px solid orangered; cursor: pointer; }

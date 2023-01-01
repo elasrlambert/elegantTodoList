@@ -19,7 +19,7 @@
                 <transition-group tag="ul" name="todo" v-if="todoList_show.length != 0">
                     <li :key="item.id" v-for="(item,index) in todoList_show">
                         <div :class="item.computed?'status-item-finished':'status-item'" @click="item.computed = !item.computed"></div>
-                        <span :class="{del:item.computed}">{{item.content}}</span>
+                        <span :class="{del:item.computed}" @dblclick="justifyContent(item)" title="双击修改todo内容">{{item.content}}</span>
                         <button @click.exact.ctrl.left="todoList.splice(index, 1)" @dblclick="todoList.splice(index, 1)" title='按住"ctrl"+“鼠标左键”，或双击删除。'>✖</button>
                     </li>
                 </transition-group>
@@ -54,6 +54,7 @@
                     status: 0,
                 },
                 methods: {
+                    // 添加 todo item
                     addTodo() {
                         if (!this.userInput) {
                             alert("请输入有效内容！");
@@ -66,9 +67,16 @@
                         });
                         this.userInput = "";
                     },
+                    // 清除已完成的任务
                     clearFinished() {
                         if (window.confirm("你确定要清除已完成的 todo 吗")) {
                             this.todoList = this.todoList.filter((el) => !el.computed);
+                        }
+                    },
+                    // 双击修改 todo 的内容
+                    justifyContent(item) {
+                        if ((res = prompt("请输入您要修改的内容：", item.content))) {
+                            item.content = res.trim();
                         }
                     },
                     // 初始化，加载本地存储的 todoList 数据
@@ -111,9 +119,8 @@
                     // 自动保存修改到本地存储
                     todoList: {
                         deep: true,
-                        handler() {
+                        handler(newval, oldval) {
                             localStorage.setItem("todoListData", JSON.stringify(this.todoList));
-                            // console.log(this.todoList);
                         },
                     },
                 },
