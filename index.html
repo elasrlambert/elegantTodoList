@@ -20,7 +20,7 @@
                     <li :key="item.id" v-for="(item,index) in todoList_show">
                         <div :class="item.computed?'status-item-finished':'status-item'" @click="item.computed = !item.computed"></div>
                         <span :class="{del:item.computed}">{{item.content}}</span>
-                        <button @click.exact.ctrl.left="todoList.splice(index, 1)" title='按住"ctrl"+“鼠标左键”删除。'>✖</button>
+                        <button @click.exact.ctrl.left="todoList.splice(index, 1)" @dblclick="todoList.splice(index, 1)" title='按住"ctrl"+“鼠标左键”，或双击删除。'>✖</button>
                     </li>
                 </transition-group>
                 <div class="noneTodo" v-else>

@@ -1,6 +1,8 @@
 @charset "UTF-8";
 * { padding: 0; margin: 0; }
 
+@media screen and (max-width: 400px) { .footer ul { flex-wrap: wrap; } }
+
 .title { text-align: center; font-family: "宋体"; letter-spacing: 10px; margin-top: 25px; }
 
 @keyframes relaxAnimation { 0% { text-shadow: -8px 0px 5px #000; }
@@ -16,7 +18,7 @@
 
 .header button:hover { color: white; background-color: orangered; cursor: pointer; box-shadow: 2px 2px 0px 2px transparent; transform: rotateZ(0deg); }
 
-.content-box { width: 600px; margin: 15px auto; perspective: 800px; min-height: 250px; transform-style: preserve-3d; }
+.content-box { width: 600px; max-width: 80%; margin: 15px auto; perspective: 800px; min-height: 250px; transform-style: preserve-3d; }
 
 .content-box li { list-style: none; margin-top: 15px; display: flex; justify-content: space-between; padding: 5px; border-radius: 5px; box-shadow: 0px 0px 1px 1px #999; font-family: "宋体"; letter-spacing: 2px; transition: all 0.5s; background-color: #fffbf7; word-break: break-all; }
 
@@ -30,13 +32,13 @@
 
 .content-box li .status-item-finished:hover { cursor: pointer; border-color: orangered; }
 
+.content-box li span { display: inline-block; margin-left: 15px; width: 90%; }
+
+.content-box li span.del { text-decoration: line-through; }
+
 .content-box li button { padding: 0 10px; background-color: transparent; height: 25px; line-height: 25px; margin: auto 0; border: none; }
 
 .content-box li button:hover { cursor: pointer; background-color: black; color: #fff; }
-
-.content-box li span { display: inline-block; width: 90%; }
-
-.content-box li span.del { text-decoration: line-through; }
 
 .content-box li:hover { transform: translateZ(50px); box-shadow: 0px 0px 8px 2px #eee; }
 
@@ -48,9 +50,9 @@
 
 .todo-leave-active { display: block; width: 100%; position: absolute; }
 
-.footer ul { width: 600px; margin: 55px auto; display: flex; justify-content: space-around; border-top: 2px dashed #000; padding-top: 25px; }
+.footer ul { width: 600px; max-width: 80%; margin: 55px auto; display: flex; justify-content: space-around; border-top: 2px dashed #000; padding-top: 25px; }
 
-.footer ul li { list-style: none; padding: 5px; border-radius: 5px; font-weight: 550; }
+.footer ul li { text-align: center; list-style: none; padding: 5px; border-radius: 5px; font-weight: 550; }
 
 .footer ul li:not(:first-child):hover { background-color: orangered; color: white; cursor: pointer; }
 
