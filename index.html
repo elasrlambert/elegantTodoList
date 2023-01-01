@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>My Todo</title>
+        <link rel="stylesheet" href="./css/stylemin.css" />
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14"></script>
+    </head>
+    <body>
+        <div id="app">
+            <div class="title"><h1>今天要干嘛？</h1></div>
+            <div class="header">
+                <input type="text" v-model.trim="userInput" @keyup.enter="addTodo" placeholder="请输入内容..." />
+                <button @click="addTodo">添加</button>
+            </div>
+            <div class="content-box">
+                <transition-group tag="ul" name="todo" v-if="todoList_show.length != 0">
+                    <li :key="item.id" v-for="(item,index) in todoList_show">
+                        <div :class="item.computed?'status-item-finished':'status-item'" @click="item.computed = !item.computed"></div>
+                        <span :class="{del:item.computed}">{{item.content}}</span>
+                        <button @click.exact.ctrl.left="todoList.splice(index, 1)" title='按住"ctrl"+“鼠标左键”删除。'>✖</button>
+                    </li>
+                </transition-group>
+                <div class="noneTodo" v-else>
+                    <h3>空空如也</h3>
+                </div>
+            </div>
+            <div class="footer">
+                <ul>
+                    <li>剩余任务：{{unfinishNum}}</li>
+                    <li @click="status = 0" :class="{active:status == 0}">全部</li>
+                    <li @click="status = 1" :class="{active:status == 1}">未完成</li>
+                    <li @click="status = 2" :class="{active:status == 2}">已完成</li>
+                    <li @click="clearFinished">清除已完成</li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            let vm = new Vue({
+                el: "#app",
+                data: {
+                    todoList: [
+                        // {
+                        //     id: 1,
+                        //     content:
+                        //         "这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。这是一段内容。",
+                        //     computed: true,
+                        // },
+                    ],
+                    userInput: "",
+                    status: 0,
+                },
+                methods: {
+                    addTodo() {
+                        if (!this.userInput) {
+                            alert("请输入有效内容！");
+                            return;
+                        }
+                        this.todoList.push({
+                            id: +new Date(),
+                            content: this.userInput.trim(),
+                            computed: false,
+                        });
+                        this.userInput = "";
+                    },
+                    clearFinished() {
+                        if (window.confirm("你确定要清除已完成的 todo 吗")) {
+                            this.todoList = this.todoList.filter((el) => !el.computed);
+                        }
+                    },
+                    // 初始化，加载本地存储的 todoList 数据
+                    initTodoList() {
+                        if (localStorage.getItem("todoListData")) {
+                            this.todoList = JSON.parse(localStorage.getItem("todoListData"));
+                        }
+                    },
+                },
+                computed: {
+                    todoList_show() {
+                        // console.log(this.status);
+                        switch (this.status) {
+                            case 0:
+                                return this.todoList;
+                                break;
+                            case 1:
+                                return this.todoList.filter((i) => !i.computed);
+                                break;
+                            case 2:
+                                return this.todoList.filter((i) => i.computed);
+                                break;
+                            default:
+                                console.log("status 发生了错误！");
+                                return false;
+                                break;
+                        }
+                    },
+                    unfinishNum() {
+                        let num = 0;
+                        this.todoList.forEach((el) => {
+                            if (!el.computed) {
+                                num++;
+                            }
+                        });
+                        return num;
+                    },
+                },
+                watch: {
+                    // 自动保存修改到本地存储
+                    todoList: {
+                        deep: true,
+                        handler() {
+                            localStorage.setItem("todoListData", JSON.stringify(this.todoList));
+                            // console.log(this.todoList);
+                        },
+                    },
+                },
+            });
+            vm.initTodoList();
+        </script>
+    </body>
+</html>

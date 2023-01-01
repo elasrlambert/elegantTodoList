@@ -1,0 +1,57 @@
+@charset "UTF-8";
+* { padding: 0; margin: 0; }
+
+.title { text-align: center; font-family: "宋体"; letter-spacing: 10px; margin-top: 25px; }
+
+@keyframes relaxAnimation { 0% { text-shadow: -8px 0px 5px #000; }
+  100% { text-shadow: 8px 0px 5px #000; } }
+
+.header { width: 320px; height: 55px; margin: 15px auto; line-height: 55px; text-align: center; }
+
+.header input { width: 220px; padding: 5px; border: none; font-size: 15px; border-bottom: #999 2px dashed; letter-spacing: 3px; font-weight: bold; outline: none; }
+
+.header input::placeholder { color: orangered; opacity: 0.3; }
+
+.header button { padding: 5px; background-color: white; font-weight: bold; border-radius: 5px; outline: none; transform: rotateZ(15deg); box-shadow: 2px 2px 0px 2px #000; transition: 0.1s all; }
+
+.header button:hover { color: white; background-color: orangered; cursor: pointer; box-shadow: 2px 2px 0px 2px transparent; transform: rotateZ(0deg); }
+
+.content-box { width: 600px; margin: 15px auto; perspective: 800px; min-height: 250px; transform-style: preserve-3d; }
+
+.content-box li { list-style: none; margin-top: 15px; display: flex; justify-content: space-between; padding: 5px; border-radius: 5px; box-shadow: 0px 0px 1px 1px #999; font-family: "宋体"; letter-spacing: 2px; transition: all 0.5s; background-color: #fffbf7; word-break: break-all; }
+
+.content-box li .status-item { width: 10px; height: 10px; border: 2px solid #999; margin: auto 0; }
+
+.content-box li .status-item:hover { cursor: pointer; border-color: orangered; }
+
+.content-box li .status-item-finished { width: 10px; height: 10px; border: 2px solid #999; margin: auto 0; position: relative; }
+
+.content-box li .status-item-finished::after { position: absolute; top: -10px; left: 0; display: block; font-size: 18px; color: orangered; font-weight: bold; content: "✔"; }
+
+.content-box li .status-item-finished:hover { cursor: pointer; border-color: orangered; }
+
+.content-box li button { padding: 0 10px; background-color: transparent; height: 25px; line-height: 25px; margin: auto 0; border: none; }
+
+.content-box li button:hover { cursor: pointer; background-color: black; color: #fff; }
+
+.content-box li span { display: inline-block; width: 90%; }
+
+.content-box li span.del { text-decoration: line-through; }
+
+.content-box li:hover { transform: translateZ(50px); box-shadow: 0px 0px 8px 2px #eee; }
+
+.content-box .noneTodo h3 { height: 100%; font-size: 35px; text-align: center; transition: all 10s; transform: skew(30px); color: orangered; animation: relaxAnimation 3s linear alternate infinite; line-height: 100px; opacity: 0.35; }
+
+.todo-enter, .todo-leave-to { transform: translateY(-150px) !important; opacity: 0; }
+
+.todo-enter-active, .todo-leave-active { transform-style: preserve-3d; perspective: 800px; transition: all 0.8s !important; }
+
+.todo-leave-active { display: block; width: 100%; position: absolute; }
+
+.footer ul { width: 600px; margin: 55px auto; display: flex; justify-content: space-around; border-top: 2px dashed #000; padding-top: 25px; }
+
+.footer ul li { list-style: none; padding: 5px; border-radius: 5px; font-weight: 550; }
+
+.footer ul li:not(:first-child):hover { background-color: orangered; color: white; cursor: pointer; }
+
+.footer ul li:not(:first-child).active { background-color: orangered; color: white; cursor: pointer; }
